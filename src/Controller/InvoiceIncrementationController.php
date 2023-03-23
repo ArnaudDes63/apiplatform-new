@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Invoice;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
+// use Symfony\Component\Routing\Annotation\Route;
 
-class InvoiceIncrementationController {
+class InvoiceIncrementationController 
+{
 
     /** @var EntityManagerInterface */
     private $manager;
