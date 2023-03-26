@@ -22,11 +22,14 @@ import "./bootstrap";
 import Navbar from "./js/components/Navbar";
 import PrivateRoute from "./js/components/PrivateRoute";
 import AuthContext from "./js/contexts/AuthContext";
+import CustomerPage from "./js/pages/CustomerPage";
 import CustomersPage from "./js/pages/CustomersPage";
 import HomePage from "./js/pages/HomePage";
+import InvoicePage from "./js/pages/InvoicePage";
 import InvoicesPage from "./js/pages/InvoicesPage";
 import LoginPage from "./js/pages/loginPage";
 import AuthAPI from "./js/services/authAPI";
+import RegisterPage from "./js/pages/RegisterPage";
 
 // console.log("Hello world!!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -53,7 +56,10 @@ const App = () => {
         <div className="container pt-5">
           <Switch>
             <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
+            <PrivateRoute path="/invoices/:id" component={InvoicePage} />
             <PrivateRoute path="/invoices" component={InvoicesPage} />
+            <PrivateRoute path="/customers/:id" component={CustomerPage} />
             <PrivateRoute path="/customers" component={CustomersPage} />
             <Route path="/" component={HomePage} />
           </Switch>

@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import InvoicesAPI from "../services/invoicesAPI";
+import { Link } from "react-router-dom";
 
 const STATUS_CLASSES = {
   PAID: "success",
@@ -33,7 +34,7 @@ const InvoicesPage = (props) => {
     fetchInvoices();
   }, []);
 
-    //Gestion du changement de page
+  //Gestion du changement de page
   // 1 seul fonction donc pas d'accolade obligatoire
   const handlePageChange = (page) => setCurrentPage(page);
 
@@ -57,7 +58,7 @@ const InvoicesPage = (props) => {
       console.log(error.response);
       setInvoices(originalInvoices);
     }
-  };  
+  };
 
   const itemsPerPage = 13;
 
@@ -82,7 +83,12 @@ const InvoicesPage = (props) => {
 
   return (
     <>
-      <h1>Liste des factures</h1>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1>Liste des factures</h1>
+        <Link className="btn btn-primary" to="/invoices/new">
+          Créer une facture
+        </Link>
+      </div>
 
       <div className="form-group">
         <input
@@ -126,10 +132,16 @@ const InvoicesPage = (props) => {
               </td>
               <td className="text-center">{invoice.amount.toLocaleString()}</td>
               <td>
-                <button className="btn btn-sm btn-primary">Editer</button>&nbsp;
+                <Link
+                  to={"/invoices/" + invoice.id}
+                  className="btn btn-sm btn-primary"
+                >
+                  Editer
+                </Link>
+                &nbsp;
                 <button
                   className="btn btn-sm btn-danger"
-                  onClick={() => handleDelete(invoice.id)}                  
+                  onClick={() => handleDelete(invoice.id)}
                 >
                   Supprimer
                 </button>
@@ -140,12 +152,12 @@ const InvoicesPage = (props) => {
       </table>
 
       {itemsPerPage < filteredInvoices.length && (
-      <Pagination
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        onPageChanged={handlePageChange}
-        length={filteredInvoices.length}
-      />
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onPageChanged={handlePageChange}
+          length={filteredInvoices.length}
+        />
       )}
     </>
   );
