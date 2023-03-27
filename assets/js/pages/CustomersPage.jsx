@@ -4,6 +4,7 @@ import customersAPI from "../services/customersAPI";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 const CustomersPage = (props) => {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

@@ -6,6 +6,7 @@ import CustomersAPI from "../services/customersAPI";
 import InvoicesAPI from "../services/invoicesAPI";
 import { toast } from "react-toastify";
 
+
 const InvoicePage = ({ history, match }) => {
   const { id = "new" } = match.params;
 

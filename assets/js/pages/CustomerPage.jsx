@@ -4,6 +4,7 @@ import Field from "../components/forms/Field";
 import CustomersAPI from "../services/customersAPI";
 import { toast } from "react-toastify";
 
+
 const CustomerPage = ({ history, match }) => {
   const { id = "new" } = match.params;
 

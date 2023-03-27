@@ -4,6 +4,7 @@ import AuthContext from "../contexts/AuthContext";
 import Field from "../components/forms/Field";
 import { toast } from "react-toastify";
 
+
 const LoginPage = ({ history }) => {
   const { setIsAuthenticated } = useContext(AuthContext);
 
