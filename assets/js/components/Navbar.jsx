@@ -10,7 +10,7 @@ const Navbar = ({ history }) => {
   const handleLogout = () => {
     AuthAPI.logout();
     setIsAuthenticated(false);
-    toast.info("Vous êtes désormais deconnecté ")
+    toast.info("Vous êtes désormais deconnecté ");
     history.push("/login");
   };
   return (
@@ -53,14 +53,14 @@ const Navbar = ({ history }) => {
                 </li>
                 <li className="nav-item">
                   <NavLink className="btn btn-success" to="/login">
-                    Connexion !
+                    Connexion!
                   </NavLink>
                 </li>
               </>
             )) || (
               <li className="nav-item">
                 <button onClick={handleLogout} className="btn btn-danger">
-                  Déconnexion !
+                  Déconnexion!
                 </button>
               </li>
             )}
