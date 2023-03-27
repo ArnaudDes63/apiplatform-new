@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import customersAPI from "../services/customersAPI";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CustomersPage = (props) => {
   const [customers, setCustomers] = useState([]);
@@ -14,7 +15,7 @@ const CustomersPage = (props) => {
       const data = await customersAPI.findAll();
       setCustomers(data);
     } catch (error) {
-      console.log(error.response);
+      toast.error("Impossble de charger les clients ");
     }
   };
 
@@ -33,10 +34,11 @@ const CustomersPage = (props) => {
     //2. L'approche pessimiste
     try {
       await customersAPI.delete(id);
+      toast.success("Le client a bien été supprimé");
     } catch (error) {
       setCustomers(originalCustomers);
+      toast.error("La supression du client n'a pas fonctionné");
     }
-    
 
     // deuxieme fasson
     // customersAPI
@@ -78,11 +80,12 @@ const CustomersPage = (props) => {
 
   return (
     <>
-    <div className="mb-3 d-flex justify-content-between align-items-center">
-      <h1>Liste des clients</h1>
-      <Link to="/customers/new" className="btn btn-primary">Créer un client</Link>
-
-    </div>
+      <div className="mb-3 d-flex justify-content-between align-items-center">
+        <h1>Liste des clients</h1>
+        <Link to="/customers/new" className="btn btn-primary">
+          Créer un client
+        </Link>
+      </div>
 
       <div className="form-group">
         <input
@@ -101,33 +104,35 @@ const CustomersPage = (props) => {
             <th>Client</th>
             <th>Email</th>
             <th>Entreprise</th>
-            <th className="text-center"><span className="badge rounded-pill bg-success">Factures</span></th>
+            <th className="text-center">
+              <span className="badge rounded-pill bg-success">Factures</span>
+            </th>
             <th className="text-center">Montant total</th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
-          {paginatedCustomers.map((customers) => (
-            <tr key={customers.id}>
-              <td>{customers.id}</td>
+          {paginatedCustomers.map((customer) => (
+            <tr key={customer.id}>
+              <td>{customer.id}</td>
               <td>
-                <a href="#">
-                  {customers.firstName} {customers.lastName}
-                </a>
+                <Link to={"/customers/" + customer.id}>
+                  {customer.firstName} {customer.lastName}
+                </Link>
               </td>
-              <td>{customers.email}</td>
-              <td>{customers.company}</td>
+              <td>{customer.email}</td>
+              <td>{customer.company}</td>
               <td className="text-center">
-                <span>{customers.invoices.length}</span>
+                <span>{customer.invoices.length}</span>
               </td>
               <td className="text-center">
-                {customers.totalAmount.toLocaleString()} €
+                {customer.totalAmount.toLocaleString()} €
               </td>
               <td>
                 <button
-                  onClick={() => handleDelete(customers.id)}
-                  disabled={customers.invoices.length > 0}
+                  onClick={() => handleDelete(customer.id)}
+                  disabled={customer.invoices.length > 0}
                   className="btn btn-sm btn-danger"
                 >
                   Supprimer

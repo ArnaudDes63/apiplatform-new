@@ -30,6 +30,8 @@ import InvoicesPage from "./js/pages/InvoicesPage";
 import LoginPage from "./js/pages/loginPage";
 import AuthAPI from "./js/services/authAPI";
 import RegisterPage from "./js/pages/RegisterPage";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // console.log("Hello world!!!!!!!!!!!!!!!!!!!!!!!!!");
 
@@ -65,6 +67,7 @@ const App = () => {
           </Switch>
         </div>
       </HashRouter>
+      <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
     </AuthContext.Provider>
   );
 };
