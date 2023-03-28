@@ -27,6 +27,8 @@
 # /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 
+/.env.netlify
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
