@@ -1,8 +1,6 @@
 [build]
-  command = "cd react-app && npm install && npm run build"
-  publish = "public/"[build]
+  command = "cd react-app && npm install && npm run build && cd .. && php bin/console cache:clear && php bin/console assets:install public && php bin/console assetic:dump"
   publish = "public/"
-  command = "php bin/console cache:clear && php bin/console assets:install public && php bin/console assetic:dump"
 
-[context.production.environment]
+[context.production]
   APP_ENV = "prod"
